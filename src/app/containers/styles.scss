@@ -4,3 +4,16 @@
   height: 100%;
   width: 100%;
 }
+
+.message {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  > *:first-child {
+    margin-bottom: 12px;
+  }
+  > *:last-child {
+    width: 200px;
+    right: 0;
+  }
+}
