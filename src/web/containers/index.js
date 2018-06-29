@@ -6,16 +6,16 @@ import styles from "./styles.scss";
 import TextField from "material-ui/es/TextField/TextField";
 import Button from "material-ui/es/Button/Button";
 import ListItem from "material-ui/es/List/ListItem";
-import ListItemIcon from "material-ui/es/List/ListItemIcon";
 import ListItemText from "material-ui/es/List/ListItemText";
 import ListSubheader from "material-ui/es/List/ListSubheader";
 import List from "material-ui/es/List/List";
-
+import DraftsIcon from '@material-ui/icons/Drafts';
+import axios from 'axios';
 
 class App extends React.PureComponent {
 
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
             currentMessage: null,
             messages: [],
@@ -24,11 +24,11 @@ class App extends React.PureComponent {
     }
 
     componentDidMount() {
-         this.establishWsConnection();
+        this.establishWsConnection();
     }
 
     establishWsConnection = () => {
-        const socket = new WebSocket("ws://localhost:8080");
+        const socket = new WebSocket("ws://localhost:8080/ws");
         socket.onclose = this.onWsClose;
         socket.onmessage = this.onWsMessage;
         socket.onerror = this.onWsError;
@@ -44,7 +44,7 @@ class App extends React.PureComponent {
 
     onWsMessage = (event) => {
         const message = this.composeMessage(event);
-        this.setState({ messages: this.state.messages.concat([message]) })
+        this.setState({messages: this.state.messages.concat([message])})
     };
 
     onWsError = (error) => {
@@ -58,8 +58,19 @@ class App extends React.PureComponent {
 
     renderMessage = (message, key) => {
         return <ListItem key={key}>
-            <ListItemText inset primary={message} />
+            <DraftsIcon/>
+            <ListItemText inset primary={message}/>
         </ListItem>
+    };
+
+    apiCall = (msg) => {
+        axios.post('/api/test', msg)
+            .then((response) => {
+                const message = response.data;
+                if (message) {
+                    this.setState({messages: this.state.messages.concat([message])})
+                }
+            })
     };
 
     render() {
@@ -68,7 +79,7 @@ class App extends React.PureComponent {
                 <MenuItem>Menu Item</MenuItem>
                 <MenuItem
                     onClick={() => {
-                        this.setState({ open: !this.state.open })
+                        this.setState({open: !this.state.open})
                     }}
                 >
                     Menu Item 2
@@ -80,13 +91,20 @@ class App extends React.PureComponent {
                     multiline
                     rows="4"
                     placeholder={'Enter your message'}
-                    onChange={(event) => this.setState({ currentMessage: event.currentTarget.value })}
+                    onChange={(event) => this.setState({currentMessage: event.currentTarget.value})}
                 />
                 <Button variant="raised"
                         color="primary"
                         onClick={() => this.sendWsMessage(this.state.currentMessage)}
                 >
-                    Send
+                    Send WS
+                </Button>
+
+                <Button variant="raised"
+                        color="primary"
+                        onClick={() => this.apiCall(this.state.currentMessage)}
+                >
+                    Send HTTP
                 </Button>
             </div>
             <List

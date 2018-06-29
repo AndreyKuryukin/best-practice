@@ -1,0 +1,23 @@
+@import "../scss/common";
+
+.base {
+  height: 100%;
+  width: 100%;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  > * {
+    margin-top: 4px;
+    &:first-child {
+      margin-bottom: 12px;
+    }
+    &:not(:first-child) {
+      width: 200px;
+      right: 0;
+      margin-top: 12px;
+    }
+  }
+}

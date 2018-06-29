@@ -1,0 +1,16 @@
+{
+  "WEB": {
+    "port": 8082
+  },
+  "APP": {
+    "port": 8081,
+    "bodyParser": {
+      "json": {
+        "limit": "50mb"
+      }
+    },
+    "urlencoded": {
+      "extended": true
+    }
+  }
+}

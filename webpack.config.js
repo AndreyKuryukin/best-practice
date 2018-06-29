@@ -3,16 +3,17 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const scssLoader  = require('./src/utils/uniq-scss-loader');
 
 module.exports = {
-    entry: './src/app/index.js',
+    entry: './src/web/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js'
     },
     plugins: [
         new CopyWebpackPlugin([{
-            from: 'src/static/index.html',
+            from: 'src/web/static/index.html',
             to: 'index.html'
         }]),
         new ExtractTextPlugin('styles.css', {
@@ -28,7 +29,7 @@ module.exports = {
             {
                 test: /\.scss$/,
                 exclude: [
-                    path.resolve(__dirname, 'src/app/scss')
+                    path.resolve(__dirname, 'src/web/scss')
                 ],
                 loader: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
@@ -45,7 +46,7 @@ module.exports = {
             {
                 test: /\.scss$/,
                 include: [
-                    path.resolve(__dirname, 'src/app/scss')
+                    path.resolve(__dirname, 'src/web/scss')
                 ],
                 loader: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
@@ -67,8 +68,8 @@ module.exports = {
         compress: true,
         port: 8080,
         proxy: {
-            '*': {
-                target: 'ws://localhost:8081/',
+            '/ws': {
+                target: 'ws://localhost:8082/',
                 ws: true
             }
         }
