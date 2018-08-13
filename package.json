@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --config=./jest.config.json",
-    "dev": "concurrently --kill-others \"webpack-dev-server --color\" \"node src/app/server.js\"",
+    "dev": "concurrently --kill-others \"webpack-dev-server --color\" \"nodemon src/app/lib/server.js --config=./src/app/config/config.js\"",
+    "web": "webpack-dev-server --color",
+    "srv": "nodemon --inspect src/app/lib/server.js --config=./src/app/config/config.js",
     "build": "webpack --bail"
   },
   "author": "",
@@ -13,7 +15,9 @@
   "dependencies": {
     "@material-ui/core": "^1.0.0-rc.0",
     "@material-ui/icons": "^1.0.0",
+    "args-parser": "^1.1.0",
     "axios": "^0.18.0",
+    "lodash": "^4.17.10",
     "material-ui": "^1.0.0-beta.47",
     "node-validator": "^0.1.27",
     "npm": "^6.0.1",
@@ -48,5 +52,9 @@
     "webpack": "^3.12.0",
     "webpack-cli": "^2.1.4",
     "webpack-dev-server": "^2.9.1"
+  },
+  "nodemonConfig": {
+    "ignore": ["src/web/*"],
+    "delay": "1000"
   }
 }

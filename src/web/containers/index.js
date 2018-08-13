@@ -28,7 +28,7 @@ class App extends React.PureComponent {
     }
 
     establishWsConnection = () => {
-        const socket = new WebSocket("ws://localhost:8080/ws");
+        const socket = new WebSocket("ws://localhost:8001");
         socket.onclose = this.onWsClose;
         socket.onmessage = this.onWsMessage;
         socket.onerror = this.onWsError;

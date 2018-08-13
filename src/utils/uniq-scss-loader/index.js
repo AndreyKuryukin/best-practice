@@ -1,5 +1,5 @@
 module.exports = function (content) {
-    console.log()
+    console.log();
     return content
     // let callback = this.async();
     //
