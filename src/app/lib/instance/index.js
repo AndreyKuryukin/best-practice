@@ -57,7 +57,7 @@ class Instance {
         }
     }
 
-    applyChain(chain, data) {
+    applyChain(chain, data, take) {
         let promise = new Promise((resolve) => {
             resolve(data)
         });
@@ -71,12 +71,12 @@ class Instance {
             })
         });
 
-        return promise;
+        return promise.then((content) => ({content, take}));
     }
 
     processModuleData(data, take) {
         if (this.chain) {
-            return this.applyChain(this.chain, data)
+            return this.applyChain(this.chain, data, take)
         } else {
             take(data);
         }

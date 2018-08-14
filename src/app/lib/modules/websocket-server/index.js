@@ -6,8 +6,8 @@ module.exports = function webSocketServer(content, config, take) {
     wss.on('connection', function connection(ws) {
         try {
             ws.on('message', (message) => {
-                take(message).then((data) => {
-                    if (data) {
+                take(message).then(({ content }) => {
+                    if (content) {
                         ws.send(data)
                     }
                 });
