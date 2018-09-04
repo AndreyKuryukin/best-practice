@@ -46,6 +46,7 @@
     "fast-sass-loader": "^1.4.5",
     "istanbul": "^0.4.5",
     "jest": "^23.3.0",
+    "jest-cli": "^23.5.0",
     "jest-mock": "^23.2.0",
     "node-sass": "^4.9.0",
     "path": "^0.12.7",
