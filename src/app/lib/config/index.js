@@ -4,7 +4,7 @@ const path = require('path');
 const procArgs = require("args-parser")(process.argv);
 
 const DEFAULT_CONFIG = {};
-
+//todo: Replace with "config" npm package
 class Config {
     constructor(args = procArgs, defaultCfg = DEFAULT_CONFIG) {
         if (args.config) {

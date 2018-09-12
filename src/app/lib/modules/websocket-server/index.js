@@ -8,7 +8,7 @@ module.exports = function webSocketServer(content, config, take) {
             ws.on('message', (message) => {
                 take(message).then(({ content }) => {
                     if (content) {
-                        ws.send(data)
+                        ws.send(content)
                     }
                 });
 

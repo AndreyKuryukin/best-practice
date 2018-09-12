@@ -24,8 +24,6 @@ class Instance {
         if (config.name) {
             this.name = config.name
         }
-
-
     }
 
     initConfig(config) {
@@ -38,7 +36,7 @@ class Instance {
         } catch (e) {
             console.log(`Cant find module ${module}`.yellow);
             if (!this.chain || this.chain.length === 1) {
-                console.log(`Chain not specifiend => applying transparent module`.yellow);
+                console.log(`Chain not specified => applying transparent module`.yellow);
                 return function () {
                     return arguments
                 }

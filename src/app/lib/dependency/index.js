@@ -9,7 +9,7 @@ const tryCatch = (() => {
             try {
                 result = statement()
             } catch (e) {
-                console.log(e)
+
             }
         }
         return car

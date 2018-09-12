@@ -49,6 +49,7 @@
     "jest-cli": "^23.5.0",
     "jest-mock": "^23.2.0",
     "node-sass": "^4.9.0",
+    "nodemon": "^1.18.4",
     "path": "^0.12.7",
     "style-loader": "^0.21.0",
     "webpack": "^3.12.0",
