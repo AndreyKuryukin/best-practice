@@ -1,31 +1,25 @@
 module.exports = {
     instances: [{
-        name: 'Эхо сервер',
-        module: 'websocket-server',
+        name: 'WebServer',
+        module: 'web-server',
         chain: [{
-            name: 'echo',
-            module: 'echo',
+            name: 'Static files',
+            module: 'web-static',
             config: {
-                timeout: 2000,
+                path: 'dist',
+                index: 'index.html'
             }
-        }, {
-            name: 'uppercase',
-            module: 'uppercase',
-        }, {
-            name: 'reverse',
-            module: 'reverse',
         }],
         config: {
-            wsPort: 8001,
-            path: './dist',
+            port: 8010,
             bodyParser: {
                 json: {
                     limit: "50mb"
+                },
+                urlencoded: {
+                    extended: true
                 }
             },
-            urlencoded: {
-                extended: true
-            }
         },
     }],
 };
